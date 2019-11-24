@@ -294,6 +294,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://toolsh.github.io/2019/11/24/candy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="toolsh">
+      <meta itemprop="description" content="python, golang, java, js, 爬虫, 深度学习">
+      <meta itemprop="image" content="/ximages/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="toolsh">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/24/candy/" class="post-title-link" itemprop="url">糖果问题</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-24 11:10:57 / 修改时间：11:08:43" itemprop="dateCreated datePublished" datetime="2019-11-24T11:10:57+08:00">2019-11-24</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>幼儿园老师在桌上放了一堆糖果M颗。他让小朋友两两一组做游戏，比如小明和小华一组，他们两人轮流（小明先拿）从桌上拿苹果，每次拿的糖果必须是整数：n1, n2, n3, …, nk中的一个，谁能拿到最后一颗糖果就算胜利。假定小明和小华都能采取最优策略，谁会获胜？另外假定 n1, n2, n3, …, nk 中一定含有数字1。</p>
+<p>一些限制条件：1 &lt;= M &lt;= 500; 1 &lt;= k &lt;= 50; 1 &lt;= nk &lt;= M;</p>
+<p>输入：糖果数 M, k，以及 n1, n2, n3, …, nk</p>
+<p>输出：获胜者（小明或是小华）</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solve</span><span class="params">(M, n_list, solutions)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> M &gt; len(solutions) <span class="keyword">or</span> M &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span>):</span><br><span class="line">        solutions[M] = [<span class="number">0</span>, <span class="string">"输，没能拿最后一个"</span>]</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> (M <span class="keyword">in</span> n_list):</span><br><span class="line">        solutions[M] = [<span class="number">1</span>, <span class="string">"赢，全部拿走"</span>]</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> n_list:</span><br><span class="line">        <span class="keyword">if</span> (M-k &gt; <span class="number">0</span> <span class="keyword">and</span> solutions[M-k][<span class="number">0</span>] == <span class="number">0</span>):</span><br><span class="line">            solutions[M] = [<span class="number">1</span>, <span class="string">"赢，拿掉&#123;&#125;个剩余&#123;&#125;个致对手输"</span>.format(k, M-k)]</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    solutions[M] = [<span class="number">0</span>, <span class="string">"无必赢方案"</span>]</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">candy</span><span class="params">(M, n_list)</span>:</span></span><br><span class="line">    solutions = [<span class="number">0</span>, <span class="string">""</span>] * (M + <span class="number">1</span>)  <span class="comment"># solutions: 1 - 先玩者赢；0 - 先玩者输；</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(M + <span class="number">1</span>):</span><br><span class="line">        solve(i, n_list, solutions)</span><br><span class="line">        print(i, solutions[i][<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    M = int(input(<span class="string">"糖果总数(正整数)："</span>));</span><br><span class="line">    n_list = input(<span class="string">"每次拿的糖果数(空格分割，正整数列表："</span>).split(<span class="string">" "</span>);</span><br><span class="line">    n_list = sorted([int(i) <span class="keyword">for</span> i <span class="keyword">in</span> set(n_list + [<span class="number">1</span>])]);</span><br><span class="line">    <span class="keyword">assert</span> all([i &gt; <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> n_list]);</span><br><span class="line">    candy(M, n_list)</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://toolsh.github.io/2019/10/06/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,8 +412,20 @@
                 
               
 
-              <time title="创建时间：2019-10-06 00:34:00" itemprop="dateCreated datePublished" datetime="2019-10-06T00:34:00+08:00">2019-10-06</time>
+              <time title="创建时间：2019-10-06 11:10:57" itemprop="dateCreated datePublished" datetime="2019-10-06T11:10:57+08:00">2019-10-06</time>
             </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-24 11:09:27" itemprop="dateModified" datetime="2019-11-24T11:09:27+08:00">2019-11-24</time>
+              </span>
+            
           
 
           
@@ -419,8 +520,34 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
@@ -559,6 +686,8 @@ window.addEventListener('pjax:success', () => {
   
 
   
+    
+      
     
       
     

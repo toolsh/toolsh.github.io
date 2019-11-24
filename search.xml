@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[糖果问题]]></title>
+    <url>%2F2019%2F11%2F24%2Fcandy%2F</url>
+    <content type="text"><![CDATA[问题描述幼儿园老师在桌上放了一堆糖果M颗。他让小朋友两两一组做游戏，比如小明和小华一组，他们两人轮流（小明先拿）从桌上拿苹果，每次拿的糖果必须是整数：n1, n2, n3, …, nk中的一个，谁能拿到最后一颗糖果就算胜利。假定小明和小华都能采取最优策略，谁会获胜？另外假定 n1, n2, n3, …, nk 中一定含有数字1。 一些限制条件：1 &lt;= M &lt;= 500; 1 &lt;= k &lt;= 50; 1 &lt;= nk &lt;= M; 输入：糖果数 M, k，以及 n1, n2, n3, …, nk 输出：获胜者（小明或是小华） 代码12345678910111213141516171819202122232425262728293031323334#!/usr/bin/env python# -*- coding: utf-8 -*-def solve(M, n_list, solutions): if M &gt; len(solutions) or M &lt; 0: return if (M == 0): solutions[M] = [0, "输，没能拿最后一个"] return if (M in n_list): solutions[M] = [1, "赢，全部拿走"] return for k in n_list: if (M-k &gt; 0 and solutions[M-k][0] == 0): solutions[M] = [1, "赢，拿掉&#123;&#125;个剩余&#123;&#125;个致对手输".format(k, M-k)] return solutions[M] = [0, "无必赢方案"] returndef candy(M, n_list): solutions = [0, ""] * (M + 1) # solutions: 1 - 先玩者赢；0 - 先玩者输； for i in range(M + 1): solve(i, n_list, solutions) print(i, solutions[i][1])if __name__ == "__main__": M = int(input("糖果总数(正整数)：")); n_list = input("每次拿的糖果数(空格分割，正整数列表：").split(" "); n_list = sorted([int(i) for i in set(n_list + [1])]); assert all([i &gt; 0 for i in n_list]); candy(M, n_list)]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>python</tag>
+        <tag>策略</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F10%2F06%2Fhello-world%2F</url>
     <content type="text"><![CDATA[博客创建，参考: 利用 GitHub 从零开始搭建一个博客。 Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
